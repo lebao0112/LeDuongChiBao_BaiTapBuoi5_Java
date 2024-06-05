@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="_layout"
+      xmlns:custom="http://www.ultraq.net.nz/thymeleaf/custom"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>List product</title>
+</head>
+<body>
+<div layout:fragment="content" class="container body-content">
+    <h2>Edit Product</h2>
+    <form th:action="@{/products/edit}" th:object="${product}" method="post" class="form" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="name">Product Name</label>
+            <input type="text" id="name" th:field="*{name}" class="form-control" >
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+        </div>
+        <div class="form-group">
+            <label for="image" class="form-label">Image</label>
+            <img width="150px" th:src="@{/images/} + *{image}" placeholder="image"/>
+            <input type="file" id="image" class="form-control" name="imageProduct" accept="image/jpeg, image/png">
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('image')}" th:errors="*{image}"></div>
+        </div>
+        <div class="form-group">
+            <label for="price" class="form-label">Price</label>
+            <input type="number" id="price" th:field="*{price}" class="form-control" >
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+</body>
+</html>
