@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductService {
@@ -26,6 +27,11 @@ public class ProductService {
                 .orElse(0); // Provide a default value if the list is empty
     }
 
+    public List<Product> findByName(String name) {
+        return listProd.stream()
+                .filter(p -> p.getName().equalsIgnoreCase(name))
+                .collect(Collectors.toList());
+    }
 
 
     public void add(Product product){
@@ -52,6 +58,7 @@ public class ProductService {
             find.setPrice(editProduct.getPrice());
         }
 
+        
 
     }
 }

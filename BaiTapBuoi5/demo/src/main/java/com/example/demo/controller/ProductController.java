@@ -33,6 +33,12 @@ public class ProductController {
         return "products/index";
     }
 
+    @PostMapping("/search")
+    public String search(Model model, @RequestParam("name") String name){
+        model.addAttribute("listProduct",productService.findByName(name));
+        return "products/index";
+    }
+
     @GetMapping("/create")
     public String create(Model model){
         model.addAttribute("product", new Product());
